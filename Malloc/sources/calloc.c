@@ -6,7 +6,7 @@
 /*   By: kcosta <kcosta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 21:48:36 by kcosta            #+#    #+#             */
-/*   Updated: 2018/06/06 22:18:06 by kcosta           ###   ########.fr       */
+/*   Updated: 2018/06/12 10:53:57 by kcosta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*ptr;
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	ptr = (unsigned char*)b;

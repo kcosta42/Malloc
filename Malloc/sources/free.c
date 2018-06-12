@@ -6,7 +6,7 @@
 /*   By: kcosta <kcosta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 21:19:47 by kcosta            #+#    #+#             */
-/*   Updated: 2018/06/11 10:04:51 by kcosta           ###   ########.fr       */
+/*   Updated: 2018/06/12 10:57:38 by kcosta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void		ft_free(void *ptr)
 		retval = malloc_zone_free(zone, ptr);
 	}
 	if (retval)
-	{
-		zone = g_malloc_zones.large;
-		retval = malloc_metadata_free(zone, ptr);
-	}
+		retval = malloc_metadata_free(g_malloc_zones.large, ptr);
 }
 
 void		free(void *ptr)
@@ -87,9 +84,6 @@ void		free(void *ptr)
 		retval = malloc_zone_free(zone, ptr);
 	}
 	if (retval)
-	{
-		zone = g_malloc_zones.large;
-		retval = malloc_metadata_free(zone, ptr);
-	}
+		retval = malloc_metadata_free(g_malloc_zones.large, ptr);
 	pthread_mutex_unlock(&g_mutex);
 }

@@ -6,27 +6,27 @@
 /*   By: kcosta <kcosta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 21:52:58 by kcosta            #+#    #+#             */
-/*   Updated: 2018/06/11 10:00:06 by kcosta           ###   ########.fr       */
+/*   Updated: 2018/06/12 10:54:39 by kcosta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void print_unsigned(size_t addr, size_t base)
+void		print_unsigned(size_t addr, size_t base)
 {
 	char	value;
 
 	if (!addr)
 	{
 		base == 16 ? write(1, "0x", 2) : 0;
-		return;
+		return ;
 	}
 	print_unsigned(addr / base, base);
 	value = HEX_STRING[(addr % base)];
 	write(1, &value, 1);
 }
 
-static void print_malloc_metadata(t_metadata *ptr)
+static void	print_malloc_metadata(t_metadata *ptr)
 {
 	void	*addr;
 
@@ -39,7 +39,7 @@ static void print_malloc_metadata(t_metadata *ptr)
 	write(1, " octets\n", 8);
 }
 
-static void print_all_mallocs(t_zone *ptr)
+static void	print_all_mallocs(t_zone *ptr)
 {
 	t_metadata	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: kcosta <kcosta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 19:18:40 by kcosta            #+#    #+#             */
-/*   Updated: 2018/06/06 22:42:20 by kcosta           ###   ########.fr       */
+/*   Updated: 2018/06/12 10:55:11 by kcosta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 t_malloc_zones	g_malloc_zones = { NULL, NULL, NULL };
 
-static void	_malloc_initialize(size_t size)
+static void	malloc_initialize(size_t size)
 {
 	void	*tiny;
 	void	*small;
@@ -48,7 +48,7 @@ static void	*large_malloc(size_t size)
 	t_metadata	*ptr;
 	t_metadata	*new;
 
-	ret =	mmap(NULL, size, PROT_READ | PROT_WRITE,
+	ret = mmap(NULL, size, PROT_READ | PROT_WRITE,
 				MAP_ANON | MAP_PRIVATE, -1, 0);
 	new = (t_metadata *)ret;
 	new->next = NULL;
@@ -73,7 +73,7 @@ void		*ft_malloc(size_t size)
 	void			*retval;
 
 	size = ALIGN(size);
-	_malloc_initialize(size);
+	malloc_initialize(size);
 	if (size <= TINY_LIMIT)
 		retval = tiny_malloc(size);
 	else if (size <= SMALL_LIMIT)
@@ -89,7 +89,7 @@ void		*malloc(size_t size)
 
 	pthread_mutex_lock(&g_mutex);
 	size = ALIGN(size);
-	_malloc_initialize(size);
+	malloc_initialize(size);
 	if (size <= TINY_LIMIT)
 		retval = tiny_malloc(size);
 	else if (size <= SMALL_LIMIT)
